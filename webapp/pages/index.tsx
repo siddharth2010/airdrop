@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React from "react";
 import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
@@ -16,15 +17,19 @@ const Home: NextPage = () => {
   const foo = <p>i am foo</p>;
   const userOrLogin =
     user == null ? (
-      <a href="/api/auth/login">
-        <p className={styles.description}>sign in with Twitter!</p>
-      </a>
+      <Link href="/api/auth/login">
+        <a href="/api/auth/login">
+          <p className={styles.description}>sign in with Twitter!</p>
+        </a>
+      </Link>
     ) : (
       <div>
         <img src={user.picture as string} alt={user.name as string} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
-        <a href="/api/auth/logout">Logout</a>
+        <Link href="/api/auth/logout">
+          <a href="/api/auth/logout">Logout</a>
+        </Link>
       </div>
     );
 
